@@ -1,0 +1,33 @@
+.list > li {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.list > li:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.list > li > p,
+.list > li > ol > li > p,
+.list > li > ol > li > ol > li > p,
+.list > li > ol > li > ol > li > ol > li > p {
+  margin-bottom: 16px;
+}
+
+.list > li > ol {
+  font-weight: 400;
+  padding-left: 30px;
+}
+
+.list > li > ol > li > ol,
+.list > li > ol > li > ol > li > ol {
+  padding-left: 30px;
+}
+
+@media (max-width: 766.99px) {
+  .list > li > ol {
+    font-size: 15px;
+    line-height: 1.33;
+  }
+}
