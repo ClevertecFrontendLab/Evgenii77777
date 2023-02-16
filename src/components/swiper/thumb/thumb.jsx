@@ -20,7 +20,7 @@ export const Thumb = ({ img, setThumbsSwiper }) => (
   >
     {img &&
       img.map((el) => (
-        <SwiperSlide>
+        <SwiperSlide key={`https://strapi.cleverland.by${el.url}`}>
           <img
             data-test-id='slide-mini'
             className={styles.cover}

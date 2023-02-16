@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import Chevron from '../../assets/chevr.svg';
 import { Links } from '../../links';
+import { addCategory, addPath } from '../../redux/categories/categories-actions';
 
 import styles from './menu.module.css';
 
 export const Menu = ({ categories, setOpen, open = false, burger = false, isBooksError, isCategoriesError }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+
+  const onChangeCategory = (category, path) => {
+    dispatch(addCategory(category));
+    dispatch(addPath(path));
+  };
 
   const onHandleChangeActive = (e) => {
     e.stopPropagation();
@@ -75,7 +83,11 @@ export const Menu = ({ categories, setOpen, open = false, burger = false, isBook
                   ''
                 ) : (
                   <li>
-                    <NavLink className={({ isActive }) => (isActive ? 'activeLink' : '')} to='/books/all'>
+                    <NavLink
+                      className={({ isActive }) => (isActive ? 'activeLink' : '')}
+                      to='/books/all'
+                      onClick={() => onChangeCategory('Все книги', 'all')}
+                    >
                       Все книги
                     </NavLink>
                   </li>
@@ -87,6 +99,7 @@ export const Menu = ({ categories, setOpen, open = false, burger = false, isBook
                         data-test-id={burger ? item.burger : item.test}
                         className={({ isActive }) => (isActive ? 'activeLink' : '')}
                         to={`/books/${item.path}`}
+                        onClick={() => onChangeCategory(item.name, item.path)}
                       >
                         {item.name}
                       </NavLink>

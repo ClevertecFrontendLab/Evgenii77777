@@ -11,7 +11,8 @@ import { Info } from '../../components/info';
 import { Line } from '../../components/line';
 import { Loader } from '../../components/loader';
 import { Reviews } from '../../components/reviews';
-import { Stars } from '../../components/stars';
+import { StarRaiting } from '../../components/stars-raiting';
+import { addCategory, addPath } from '../../redux/categories/categories-actions';
 import { getBook } from '../../redux/thunk/async/get-book';
 
 import styles from './book-page.module.css';
@@ -22,12 +23,20 @@ export const BookPage = () => {
   const book = useSelector((state) => state.book.book);
   const isBookError = useSelector((state) => state.book.error);
   const isBookLoading = useSelector((state) => state.book.loading);
+  const categoryName = useSelector((state) => state.category.category);
+  const categoryPath = useSelector((state) => state.category.path);
 
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
+    if (!categoryName) {
+      dispatch(addCategory('Все книги'));
+    }
+    if (!categoryPath) {
+      dispatch(addPath('all'));
+    }
     dispatch(getBook(par.bookId));
-  }, [dispatch, par.bookId]);
+  }, [categoryName, categoryPath, dispatch, par.bookId]);
 
   const onHandleChangeActive = (e) => {
     e.stopPropagation();
@@ -36,10 +45,10 @@ export const BookPage = () => {
 
   return (
     <section className={styles.section}>
-      <Line category={par.category} name={book.title} />
+      <Line path={categoryPath} category={categoryName} name={book.title} />
       {isBookError && <Error />}
       {isBookLoading && <Loader />}
-      {isBookError ? (
+      {isBookError || isBookLoading ? (
         ''
       ) : (
         <React.Fragment>
@@ -48,7 +57,7 @@ export const BookPage = () => {
             <h3 className={styles.title}>Рейтинг</h3>
             {book.rating && (
               <div className={styles.wrapper}>
-                <Stars st={false} />
+                <StarRaiting raiting={book.rating} st={false} />
                 <span className={styles.rating}>{book.rating}</span>
               </div>
             )}

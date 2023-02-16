@@ -1,5 +1,5 @@
 import Author from '../../assets/review.png';
-import { Stars } from '../stars';
+import { StarRaiting } from '../stars-raiting';
 
 import styles from './reviews.module.css';
 
@@ -19,7 +19,7 @@ export const Reviews = ({ book: { comments } }) => (
                 <span className={styles.date}>{el.createdAt}</span>
               </div>
             </div>
-            <Stars />
+            <StarRaiting raiting={el.rating} />
             <p className={styles.comment}>{el.text}</p>
           </li>
         ))}

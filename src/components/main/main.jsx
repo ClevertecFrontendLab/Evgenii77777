@@ -15,7 +15,7 @@ import { getAllCategories } from '../../redux/thunk/async/get-categories';
 import { ButtonOrder } from '../buttons/button-order';
 import { ButtonSort } from '../buttons/button-sort';
 import { Menu } from '../menu';
-import { Stars } from '../stars';
+import { StarRaiting } from '../stars-raiting';
 
 import styles from './main.module.css';
 
@@ -28,6 +28,8 @@ export const Main = () => {
   const categories = useSelector((state) => state.categories.products);
   const isBooksError = useSelector((state) => state.books.error);
   const isCategoriesError = useSelector((state) => state.categories.error);
+  const isCategoriesLoading = useSelector((state) => state.categories.loading);
+  const isBooksLoading = useSelector((state) => state.books.loading);
 
   useEffect(() => {
     dispatch(getAllCategories());
@@ -52,7 +54,7 @@ export const Main = () => {
           setOpen={setOpen}
         />
       </div>
-      {isBooksError || isCategoriesError ? (
+      {isBooksError || isCategoriesError || isCategoriesLoading || isBooksLoading ? (
         ''
       ) : (
         <div className={styles.container}>
@@ -108,7 +110,7 @@ export const Main = () => {
                   {!el.image && <img className={cn('cover', { coverLine: !active })} src={Cat} alt='cover' />}
                   <div className={cn({ wrapperLine: !active })}>
                     <div className={cn('wrapperRaiting', { ratingLine: !active })}>
-                      {el.rating ? <Stars /> : <p className={styles.rait}>ещё нет оценок</p>}
+                      {el.rating ? <StarRaiting raiting={el.rating} /> : <p className={styles.rait}>ещё нет оценок</p>}
                     </div>
                     <div className={cn('wrapperText', { wrapperTextLine: !active })}>
                       <p className={cn(styles.name, { nameLine: !active })}>{el.title}</p>
