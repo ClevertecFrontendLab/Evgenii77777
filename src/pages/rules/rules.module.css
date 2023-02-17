@@ -1,0 +1,41 @@
+.wrapper {
+  flex: 1 0 auto;
+}
+
+.title {
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.25;
+}
+
+.container {
+  display: flex;
+}
+
+.containerText {
+  width: calc(100% - 280px);
+}
+
+@media (max-width: 1198.99px) {
+  .containerText {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 1.25;
+  }
+
+  .wrapperMenu {
+    display: none;
+  }
+}
+
+@media (max-width: 766.99px) {
+  .title {
+    margin-bottom: 24px;
+    font-size: 18px;
+    line-height: 1.56;
+  }
+}

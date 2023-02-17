@@ -1,0 +1,53 @@
+.wrapper {
+  margin-bottom: 16px;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #727272;
+}
+
+.name {
+  margin: 0 24px;
+}
+
+.list > li:not(:last-child) {
+  margin-bottom: 42px;
+}
+
+.comment {
+  margin-top: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  max-width: 730px;
+  color: #363636;
+}
+
+@media (max-width: 1198.99px) {
+}
+
+@media (max-width: 766.99px) {
+  .name,
+  .date {
+    display: block;
+    margin: 0 0 0 18px;
+    font-size: 15px;
+    line-height: 1.33;
+  }
+
+  .wrapper {
+    margin-bottom: 8px;
+  }
+
+  .list > li:not(:last-child) {
+    margin-bottom: 32px;
+  }
+
+  .comment {
+    font-size: 15px;
+    line-height: 1.33;
+  }
+}

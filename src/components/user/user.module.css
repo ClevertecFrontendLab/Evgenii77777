@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.greeting {
+  margin-right: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+.avatar {
+  height: 58px;
+  width: 58px;
+}
+
+@media (max-width: 1199.99px) {
+  .container {
+    display: none;
+  }
+}

@@ -1,0 +1,29 @@
+.container,
+.wrapper {
+  display: flex;
+}
+
+.container > img:not(:last-child) {
+  margin-right: 6px;
+}
+
+.wrapper > img:not(:last-child) {
+  margin-right: 12px;
+}
+
+.wrapper > img {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 766.99px) {
+  .container > img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .wrapper > img {
+    width: 32px;
+    height: 32px;
+  }
+}

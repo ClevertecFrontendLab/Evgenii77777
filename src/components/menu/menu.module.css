@@ -1,0 +1,99 @@
+.container {
+  width: 260px;
+}
+
+.item {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.56;
+}
+
+.item:not(:first-child) {
+  margin-top: 42px;
+}
+
+.list {
+  padding-left: 20px;
+  max-height: 1000px;
+}
+
+.listNotActive {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.2s cubic-bezier(0, 1, 0, 1);
+}
+
+.list > li {
+  margin-top: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.quantity {
+  margin-left: 6px;
+  font-size: 14px;
+  line-height: 1.71;
+  color: #a7a7a7;
+}
+
+.activeLink,
+.booksLink {
+  background: linear-gradient(233.73deg, #f83600 -16.08%, #f9d423 327.37%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.booksLink,
+.menuLink {
+  position: relative;
+}
+
+.wrapperFirsLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.booksLink::after,
+.menuLink:after {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  content: '';
+  width: 255px;
+}
+
+.booksLink::after {
+  border-bottom: 1px solid orangered;
+}
+
+.menu > li:first-child > .menuLink::after {
+  border-bottom: 1px solid #363636;
+}
+
+.menu > li:nth-child(3) > div > a {
+  padding-bottom: 52px;
+}
+
+.menu > li:nth-child(3) > div > a::after {
+  border-bottom: 1px solid #8a7878;
+}
+
+.buttonChevron {
+  padding-right: 20px;
+  border: none;
+  background: inherit;
+}
+
+.rotateChevron {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 766.99px) {
+  .booksLink::after,
+  .menuLink:after {
+    width: 236px;
+  }
+}
