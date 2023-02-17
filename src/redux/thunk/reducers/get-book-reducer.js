@@ -18,6 +18,7 @@ export const bookReducer = createSlice({
     });
     builder.addCase(getBook.fulfilled, (state, action) => {
       state.loading = false;
+      state.error = false;
       state.book = action.payload;
     });
     builder.addCase(getBook.rejected, (state) => {
