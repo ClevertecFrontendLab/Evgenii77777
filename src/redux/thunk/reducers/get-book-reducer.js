@@ -22,6 +22,7 @@ export const bookReducer = createSlice({
     });
     builder.addCase(getBook.rejected, (state) => {
       state.error = true;
+      state.book = [];
       state.loading = false;
     });
   },
