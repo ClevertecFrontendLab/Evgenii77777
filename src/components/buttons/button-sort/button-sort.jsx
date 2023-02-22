@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import cn from 'classnames';
 
 import styles from './button-sort.module.css';

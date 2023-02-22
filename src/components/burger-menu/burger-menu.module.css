@@ -4,6 +4,10 @@
 
 @media (max-width: 1198.99px) {
   .burger {
+    max-width: 502px;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: block;
     width: 32px;
     height: 32px;
@@ -12,7 +16,6 @@
 
 @media (max-width: 766.99px) {
   .burger {
-    width: 24px;
-    height: 24px;
+    width: 100%;
   }
 }

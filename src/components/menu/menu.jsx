@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import Chevron from '../../assets/chevr.svg';
@@ -8,10 +8,12 @@ import { addCategory, addPath } from '../../redux/categories/categories-actions'
 
 import styles from './menu.module.css';
 
-export const Menu = ({ categories, setOpen, open = false, burger = false, isBooksError, isCategoriesError }) => {
+export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCategoriesError }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const books = useSelector((state) => state.books.allBooks);
+  const categories = useSelector((state) => state.categories.products);
 
   const onChangeCategory = (category, path) => {
     dispatch(addCategory(category));
@@ -84,6 +86,7 @@ export const Menu = ({ categories, setOpen, open = false, burger = false, isBook
                 ) : (
                   <li>
                     <NavLink
+                      data-test-id={burger ? 'burger-books' : 'navigation-books'}
                       className={({ isActive }) => (isActive ? 'activeLink' : '')}
                       to='/books/all'
                       onClick={() => onChangeCategory('Все книги', 'all')}
@@ -93,17 +96,24 @@ export const Menu = ({ categories, setOpen, open = false, burger = false, isBook
                   </li>
                 )}
                 {categories &&
-                  categories.map((item, i) => (
+                  categories.map((item) => (
                     <li key={item.id}>
                       <NavLink
-                        data-test-id={burger ? item.burger : item.test}
+                        data-test-id={burger ? `burger-${item.path}` : `navigation-${item.path}`}
                         className={({ isActive }) => (isActive ? 'activeLink' : '')}
                         to={`/books/${item.path}`}
                         onClick={() => onChangeCategory(item.name, item.path)}
                       >
                         {item.name}
                       </NavLink>
-                      <span className={styles.quantity}>{i + 10}</span>
+                      <span
+                        className={styles.quantity}
+                        data-test-id={
+                          burger ? `burger-book-count-for-${item.path}` : `navigation-book-count-for-${item.path}`
+                        }
+                      >
+                        {books.filter((book) => book.categories.includes(item.name)).length}
+                      </span>
                     </li>
                   ))}
               </ul>

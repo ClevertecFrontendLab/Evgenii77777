@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import styled from 'styled-components';
 
 export const StyledBurger = styled.button`
   position: absolute;
-  top: 30px;
+  top: 26px;
   left: 66px;
   display: flex;
   flex-direction: column;
