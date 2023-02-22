@@ -18,6 +18,9 @@ export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCa
   const onChangeCategory = (category, path) => {
     dispatch(addCategory(category));
     dispatch(addPath(path));
+    if (open) {
+      setOpen(false);
+    }
   };
 
   const onHandleChangeActive = (e) => {

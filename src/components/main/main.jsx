@@ -44,6 +44,7 @@ export const Main = () => {
     if (categories.length === 0) {
       dispatch(getAllCategories());
     }
+
     setValue('');
 
     dispatch(getAllBooks());
