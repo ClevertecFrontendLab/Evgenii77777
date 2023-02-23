@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import Block from '../../assets/block.svg';
 import BlockWhite from '../../assets/block_white.svg';
-import Cat from '../../assets/catnone.jpg';
 import Cross from '../../assets/cross.svg';
 import Line from '../../assets/line.svg';
 import LineWhite from '../../assets/line_white.svg';
 import Search from '../../assets/search.svg';
+import Sort from '../../assets/sort.svg';
 import { getAllBooks } from '../../redux/thunk/async/get-all-books';
 import { getAllCategories } from '../../redux/thunk/async/get-categories';
-import { ButtonOrder } from '../buttons/button-order';
 import { ButtonSort } from '../buttons/button-sort';
+import { Card } from '../card';
+import { EmpthyCategory } from '../empthy-category';
 import { Menu } from '../menu';
-import { StarRaiting } from '../stars-raiting';
 
 import styles from './main.module.css';
 
@@ -24,17 +24,31 @@ export const Main = () => {
   const params = useParams();
   const [active, setActive] = useState(true);
   const [open, setOpen] = useState(false);
+  const [max, setMax] = useState(true);
+  const [value, setValue] = useState('');
+  const cat = useSelector((state) => state.category.category);
   const books = useSelector((state) => state.books.allBooks);
   const categories = useSelector((state) => state.categories.products);
   const isBooksError = useSelector((state) => state.books.error);
   const isCategoriesError = useSelector((state) => state.categories.error);
   const isCategoriesLoading = useSelector((state) => state.categories.loading);
   const isBooksLoading = useSelector((state) => state.books.loading);
+  const maxSorted = [...books]
+    .sort((a, b) => b.rating - a.rating)
+    .filter((el) => el.title.toLowerCase().includes(value.toLowerCase()));
+  const minSorted = [...books]
+    .sort((a, b) => a.rating - b.rating)
+    .filter((el) => el.title.toLowerCase().includes(value.toLowerCase()));
 
   useEffect(() => {
-    dispatch(getAllCategories());
+    if (categories.length === 0) {
+      dispatch(getAllCategories());
+    }
+
+    setValue('');
+
     dispatch(getAllBooks());
-  }, [dispatch]);
+  }, [categories.length, dispatch]);
 
   const onChangeFormList = () => {
     setActive(!active);
@@ -42,6 +56,14 @@ export const Main = () => {
 
   const onChangeInput = () => {
     setOpen(!open);
+  };
+
+  const onChangeRatingSort = () => {
+    setMax(!max);
+  };
+
+  const onChangeInputSearch = (e) => {
+    setValue(e);
   };
 
   return (
@@ -52,6 +74,7 @@ export const Main = () => {
           isCategoriesError={isCategoriesError}
           isBooksError={isBooksError}
           setOpen={setOpen}
+          books={books}
         />
       </div>
       {isBooksError || isCategoriesError || isCategoriesLoading || isBooksLoading ? (
@@ -60,21 +83,34 @@ export const Main = () => {
         <div className={styles.container}>
           <div className={styles.wrapper}>
             <div className={styles.wrapperInput}>
-              <input className={styles.search} type='search' placeholder='Поиск книги или автора…' />
               <div className={styles.boxInput}>
-                {!open && <ButtonSort img={Search} name='search' change={onChangeInput} test='button-search-open' />}
-                <div className={open ? styles.openSearch : styles.closeSearch} data-test-id='input-search'>
-                  <input className={styles.searchMobile} type='search' placeholder='Поиск книги или автора…' />
+                <div className={styles.btnContainer}>
+                  {!open && <ButtonSort img={Search} name='search' change={onChangeInput} test='button-search-open' />}
+                </div>
+                <div className={open ? styles.openSearch : styles.closeSearch}>
+                  <input
+                    data-test-id='input-search'
+                    className={open ? styles.search : styles.searchClosed}
+                    type='text'
+                    placeholder='Поиск книги или автора…'
+                    onChange={(e) => onChangeInputSearch(e.target.value)}
+                  />
                   <button
                     data-test-id='button-search-close'
                     onClick={() => onChangeInput()}
-                    className={styles.closeBtn}
+                    className={open ? styles.closeBtn : styles.openBtn}
                     type='button'
                   >
                     <img src={Cross} alt='cross' />
                   </button>
                 </div>
-                <button className={styles.sort} type='button'>
+                <button
+                  data-test-id='sort-rating-button'
+                  className={styles.sort}
+                  type='button'
+                  onClick={() => onChangeRatingSort()}
+                >
+                  <img className={max ? styles.maxSort : styles.minSort} src={Sort} alt='icon-sort' />
                   <p className={styles.sortText}>По рейтингу</p>
                 </button>
               </div>
@@ -97,38 +133,18 @@ export const Main = () => {
             </div>
           </div>
           <ul className={cn(styles.list, { listLine: !active })}>
-            {books.map((el) => (
-              <li data-test-id='card' className={cn(styles.item, { itemLine: !active })} key={el.id}>
-                <Link className={cn('linkBooks', { linkLine: !active })} to={`/books/${params.category}/${el.id}`}>
-                  {el.image && (
-                    <img
-                      className={cn('cover', { coverLine: !active })}
-                      src={`https://strapi.cleverland.by${el.image.url}`}
-                      alt='cover'
-                    />
-                  )}
-                  {!el.image && <img className={cn('cover', { coverLine: !active })} src={Cat} alt='cover' />}
-                  <div className={cn({ wrapperLine: !active })}>
-                    <div className={cn('wrapperRaiting', { ratingLine: !active })}>
-                      {el.rating ? <StarRaiting raiting={el.rating} /> : <p className={styles.rait}>ещё нет оценок</p>}
-                    </div>
-                    <div className={cn('wrapperText', { wrapperTextLine: !active })}>
-                      <p className={cn(styles.name, { nameLine: !active })}>{el.title}</p>
-                      <span className={cn(styles.author, { authorLine: !active })}>{el.authors}</span>
-                      <span className={cn(styles.author, { authorLine: !active })}>,{el.issueYear}</span>
-                    </div>
-                  </div>
-                  <div className={cn(styles.wrapperOrder, { orderLine: !active })}>
-                    {!el.booking?.order && !el.delivery?.handed && <ButtonOrder text='Забронировать' />}
-                    {el.booking?.order && <ButtonOrder text='Забронирована' booked={true} />}
-                    {el.delivery?.handed && (
-                      <ButtonOrder text={`Отложена до ${el.delivery.dateHandedTo}`} postponed={true} />
-                    )}
-                  </div>
-                </Link>
-              </li>
-            ))}
+            {cat === 'Все книги'
+              ? (max ? maxSorted : minSorted).map((el) => (
+                  <Card el={el} value={value} active={active} params={params} />
+                ))
+              : (max ? maxSorted : minSorted)
+                  .filter((item) => item.categories.includes(cat))
+                  .map((el) => <Card el={el} value={value} active={active} params={params} />)}
           </ul>
+          {(maxSorted.filter((item) => item.categories.includes(cat)).length === 0 ||
+            minSorted.filter((item) => item.categories.includes(cat)).length === 0) && (
+            <EmpthyCategory value={value} minSorted={minSorted} maxSorted={maxSorted} />
+          )}
         </div>
       )}
     </main>

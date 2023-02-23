@@ -38,7 +38,7 @@
   }
 
   .title {
-    margin-left: 24px;
+    margin-left: 50px;
   }
 }
 
@@ -53,6 +53,7 @@
   }
 
   .title {
+    margin-left: 40px;
     font-size: 18px;
     line-height: 1.56;
   }
