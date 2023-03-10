@@ -21,7 +21,9 @@ export const About = ({ book: { images, title, authors, description, booking, de
           {images && images.length > 1 && <Thumb setThumbsSwiper={setThumbsSwiper} img={images} />}
         </div>
         <div className={styles.wrapper}>
-          <h2 className={styles.title}>{title}</h2>
+          <h2 data-test-id='book-title' className={styles.title}>
+            {title}
+          </h2>
           <span className={styles.author}>
             {authors},{issueYear}
           </span>

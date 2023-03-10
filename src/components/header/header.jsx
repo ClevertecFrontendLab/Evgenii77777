@@ -17,11 +17,11 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
+      <BurgerMenu isCategoriesError={isCategoriesError} isBooksError={isBooksError} />
       {(isBooksError || isCategoriesError) && <Error />}
       {(isBooksLoading || isCategoriesLoading) && <Loader />}
       <div className={styles.container}>
         <img className={styles.logo} src={Logo} alt='logo' />
-        <BurgerMenu />
         <h1 className={styles.title}>Библиотека</h1>
       </div>
       <User name={userName.identifier} />

@@ -539,4 +539,3 @@ describe('authorization and registartion', () => {
       cy.get('[data-test-id=checkmark]').should('have.length', 1);
     });
   });
-});
