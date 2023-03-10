@@ -1,0 +1,75 @@
+.input,
+.inputError {
+  width: 100%;
+  padding: 20px 12px;
+  background: #f9f9fa;
+  border: none;
+  border-bottom: 1px solid #bfc4c9;
+  border-radius: 4px;
+}
+
+.inputError {
+  border-bottom: 1px solid #f42c4f;
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #363636;
+}
+
+.inputLabel {
+  position: relative;
+}
+
+.helpText {
+  margin-top: 2px;
+  margin-bottom: 18px;
+  padding-left: 12px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.2px;
+  color: #a7a7a7;
+}
+
+.errorMessage,
+.errorForgot {
+  padding-left: 12px;
+  margin-top: 2px;
+  margin-bottom: 18px;
+  color: #f42c4f;
+}
+
+.errorForgot {
+  margin-bottom: 0;
+}
+
+.errorNum,
+.errorLetter {
+  color: #f42c4f;
+}
+
+.eye {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+}
+
+.done {
+  position: absolute;
+  top: -10px;
+  right: 44px;
+}
+
+.spanFocus {
+  position: absolute;
+  top: -20px;
+  left: 12px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.2px;
+  color: #a7a7a7;
+}

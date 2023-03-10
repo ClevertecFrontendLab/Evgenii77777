@@ -1,0 +1,177 @@
+.form {
+  position: relative;
+  max-width: 528px;
+  margin: 0 auto;
+  padding: 48px 56px;
+  text-align: left;
+  background: #ffffff;
+  border-radius: 16px;
+}
+
+.title,
+.titleRecovery {
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.25;
+  color: #363636;
+}
+
+.titleRecovery {
+  padding-top: 32px;
+}
+
+.passwordContainer {
+  margin-top: 36px;
+  margin-bottom: 20px;
+}
+
+.step {
+  margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #363636;
+}
+
+.wrapper {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.wrapper > a {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #363636;
+}
+
+.wrapper > a::after {
+  content: '';
+  display: block;
+  margin-left: 12px;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../assets/arrow.svg);
+}
+
+.errorWrapper {
+  padding-left: 12px;
+  margin-bottom: 32px;
+}
+
+.wrapperForgot {
+  padding-left: 12px;
+  margin-bottom: 32px;
+}
+
+.wrapperForgot > a {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.2px;
+  color: #a7a7a7;
+}
+
+.question {
+  margin-right: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #727272;
+}
+
+.error {
+  color: #f42c4f;
+}
+
+.linkWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 22px 54px;
+  background: #f9f9fa;
+  border-radius: 16px 16px 0px 0px;
+}
+
+.linkWrapper > a {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #727272;
+}
+
+.linkWrapper > a::before {
+  content: '';
+  display: block;
+  align-items: center;
+  margin-right: 12px;
+  width: 20px;
+  height: 13px;
+  background-image: url(../../../assets/gray-arrow.png);
+}
+
+.wrapperStep {
+  margin-top: 36px;
+  margin-bottom: 68px;
+}
+
+.descrWrapper {
+  margin-top: 68px;
+}
+
+.descr {
+  margin-top: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #727272;
+}
+
+.inputPhone {
+  width: 100%;
+  padding: 20px 12px;
+  background: #f9f9fa;
+  border: none;
+  border-bottom: 1px solid #bfc4c9;
+  border-radius: 4px;
+}
+
+.inputError {
+  border-bottom: 1px solid #f42c4f;
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #363636;
+}
+
+.inputLabel {
+  position: relative;
+}
+
+@media (max-width: 1198.99px) {
+  .form {
+    width: calc(100% - 30px);
+    padding: 24px 16px;
+  }
+  .wrapper {
+    flex-direction: column;
+    align-items: baseline;
+  }
+}

@@ -1,0 +1,41 @@
+.wrapper {
+  text-align: center;
+  width: 600px;
+  margin: 0 auto;
+  padding: 48px 94px;
+  background: #ffffff;
+  border-radius: 16px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.25;
+  color: #363636;
+}
+
+.descr {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #363636;
+}
+
+.wrapper > a {
+  display: block;
+  width: 100%;
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(233.73deg, #f83600 -16.08%, #f9d423 327.37%);
+  border: 1px solid #f83600;
+  border-radius: 20px;
+}

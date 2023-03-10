@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import Block from '../../assets/block.svg';
@@ -25,15 +25,16 @@ export const Main = () => {
   const [active, setActive] = useState(true);
   const [open, setOpen] = useState(false);
   const books = useSelector((state) => state.books.allBooks);
-  const categories = useSelector((state) => state.categories.products);
   const isBooksError = useSelector((state) => state.books.error);
   const isCategoriesError = useSelector((state) => state.categories.error);
   const isCategoriesLoading = useSelector((state) => state.categories.loading);
   const isBooksLoading = useSelector((state) => state.books.loading);
 
   useEffect(() => {
-    dispatch(getAllCategories());
-    dispatch(getAllBooks());
+    if (localStorage.getItem('JWT')) {
+      dispatch(getAllCategories());
+      dispatch(getAllBooks());
+    }
   }, [dispatch]);
 
   const onChangeFormList = () => {
@@ -44,15 +45,12 @@ export const Main = () => {
     setOpen(!open);
   };
 
+  if (!localStorage.getItem('JWT')) return <Navigate to='/auth' />;
+
   return (
     <main className={styles.main}>
       <div className={styles.wrapperMenu}>
-        <Menu
-          categories={categories}
-          isCategoriesError={isCategoriesError}
-          isBooksError={isBooksError}
-          setOpen={setOpen}
-        />
+        <Menu isCategoriesError={isCategoriesError} isBooksError={isBooksError} setOpen={setOpen} />
       </div>
       {isBooksError || isCategoriesError || isCategoriesLoading || isBooksLoading ? (
         ''

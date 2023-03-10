@@ -24,6 +24,7 @@ export const StyledDrawer = styled.nav`
     top: 74px;
     width: calc(100% - 32px);
     max-width: 502px;
+    padding: 32px 14px 52px;
     transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100vw)')};
   }
 `;

@@ -256,6 +256,14 @@ button {
   display: none;
 }
 
+.inputError {
+  border-bottom: 1px solid #f42c4f;
+}
+
+.inputFocus {
+  padding: 26px 12px 12px !important;
+}
+
 @media (max-width: 1198.99px) {
   .swiper {
     width: 188px;
