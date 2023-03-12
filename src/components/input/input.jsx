@@ -1,6 +1,5 @@
 /* eslint-disable complexity */
 /* eslint-disable consistent-return */
-/* eslint-disable import/no-extraneous-dependencies */
 import { useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import cn from 'classnames';
@@ -120,11 +119,12 @@ export const Input = ({
           {helpText}
         </p>
       )}
-      {errorMessage && name !== 'username' && name !== 'password' && (
+      {errorMessage && name !== 'username' && name !== 'password' && name !== 'passwordConfirmation' && (
         <p data-test-id='hint' className={styles.errorMessage}>
           {errorMessage}
         </p>
       )}
+
       {blur && errorMessage && name === 'username' && (
         <p data-test-id='hint' className={styles.errorMessage}>
           {errorMessage}
@@ -149,6 +149,12 @@ export const Input = ({
           <span className={len > 7 ? '' : styles.errorNum}> не менее 8 символов</span>, с
           <span className={letter ? '' : styles.errorNum}> заглавной буквой </span>и
           <span className={num ? '' : styles.errorLetter}> цифрой</span>
+        </p>
+      )}
+
+      {!blur && errorMessage && name === 'passwordConfirmation' && (
+        <p data-test-id='hint' className={styles.errorMessage}>
+          {errorMessage}
         </p>
       )}
     </div>

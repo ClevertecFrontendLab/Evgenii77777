@@ -8,6 +8,7 @@ import cn from 'classnames';
 
 import { postNewUser } from '../../../redux/thunk/async/post-new-user';
 import { addNewUser, addUser } from '../../../redux/user/user-actions';
+import { bigLetter, latLetters, maskPattern, number, pattern, ruLetters } from '../../../validation/regular';
 import { validateEmail, validateLogin, validatePassword } from '../../../validation/validation';
 import { ButtonOrder } from '../../buttons/button-order';
 import { AuthError } from '../../error/auth-error';
@@ -32,31 +33,17 @@ export const RegisterForm = () => {
   const [isPlaseholder, setIsPlaceholder] = useState(false);
   const onChangePlaceholder = () => setIsPlaceholder(true);
   const methods = useForm({ mode: 'all', reValidateMode: 'onChange' });
+  const {
+    control,
+    handleSubmit,
+    getFieldState,
+    watch,
+    formState: { errors, isValid },
+  } = methods;
+  const onValidation = (name, reg) => watch(name)?.match(reg);
 
-  const maskPattern = [
-    '+',
-    '3',
-    '7',
-    '5',
-    ' ',
-    '(',
-    /[2-4]/,
-    /[3-5,9]/,
-    ')',
-    ' ',
-    /\d/,
-    /\d/,
-    /\d/,
-    '-',
-    /\d/,
-    /\d/,
-    '-',
-    /\d/,
-    /\d/,
-  ];
-
-  const errorPhone = (value, errors) => {
-    if (errors?.type === 'required') {
+  const errorPhone = (value, err) => {
+    if (err?.type === 'required') {
       return (
         <span data-test-id='hint' className={st.errorMessage}>
           Поле не может быть пустым
@@ -64,7 +51,7 @@ export const RegisterForm = () => {
       );
     }
 
-    if (errors?.type === 'pattern') {
+    if (err?.type === 'pattern') {
       return (
         <span data-test-id='hint' className={st.errorMessage}>
           В формате +375 (xx) xxx-xx-xx
@@ -78,14 +65,6 @@ export const RegisterForm = () => {
       </span>
     );
   };
-
-  const {
-    control,
-    handleSubmit,
-    getFieldState,
-    watch,
-    formState: { errors, isValid },
-  } = methods;
 
   const onSubmit = (data) => {
     if (step === 1) {
@@ -166,9 +145,9 @@ export const RegisterForm = () => {
                 type={INPUT_TYPES.TEXT}
                 isDirty={getFieldState('username').isDirty}
                 errorMessage={errors.username?.message}
-                letter={watch('username')?.match(/[A-Za-z]/)}
-                letterRu={watch('username')?.match(/[А-Яа-я]/)}
-                num={watch('username')?.match(/[0-9]/)}
+                letter={onValidation('username', latLetters)}
+                letterRu={onValidation('username', ruLetters)}
+                num={onValidation('username', number)}
                 onBlur={() => setBlur(true)}
                 onChange={() => setBlur(false)}
                 blur={blur}
@@ -182,12 +161,12 @@ export const RegisterForm = () => {
                 label='Пароль'
                 helpText='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                 required={true}
-                isDirty={getFieldState('password').isDirty}
+                isDirty={getFieldState(INPUT_TYPES.PASSWORD).isDirty}
                 type={INPUT_TYPES.PASSWORD}
                 errorMessage={errors.password?.message}
-                letter={watch('password')?.match(/[A-ZА-Я]/)}
-                num={watch('password')?.match(/[0-9]/)}
-                len={watch('password')?.length}
+                letter={onValidation(INPUT_TYPES.PASSWORD, bigLetter)}
+                num={onValidation(INPUT_TYPES.PASSWORD, number)}
+                len={watch(INPUT_TYPES.PASSWORD)?.length}
                 onBlur={() => setBlurPassword(true)}
                 onChange={() => setBlurPassword(false)}
                 blur={blurPassword}
@@ -233,7 +212,7 @@ export const RegisterForm = () => {
                     placeholder='Номер телефона'
                     rules={{
                       required: true,
-                      pattern: /[+]?(375)[\s][(](29|25|33|44)[)][\s][\d]{3}[-][\d]{2}[-][\d]{2}/,
+                      pattern,
                     }}
                     render={({ field }) => (
                       <MaskedInput

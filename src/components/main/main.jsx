@@ -45,8 +45,6 @@ export const Main = () => {
     setOpen(!open);
   };
 
-  if (!localStorage.getItem('JWT')) return <Navigate to='/auth' />;
-
   return (
     <main className={styles.main}>
       <div className={styles.wrapperMenu}>

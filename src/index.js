@@ -16,6 +16,7 @@ import { MainPage } from './pages/main';
 import { RulesPage } from './pages/rules';
 import { TreatyPage } from './pages/treaty';
 import { store } from './redux/store';
+import { ProtectedRoutes } from './utils/protected-routes';
 
 import './index.css';
 
@@ -28,31 +29,12 @@ root.render(
         <Container>
           <Header />
           <Routes>
-            <Route
-              path='/auth'
-              element={
-                <AuthPage>
-                  <LoginForm />
-                </AuthPage>
-              }
-            />
-            <Route
-              path='/registration'
-              element={
-                <AuthPage>
-                  <RegisterForm />
-                </AuthPage>
-              }
-            />
-            <Route
-              path='/forgot-pass'
-              element={
-                <AuthPage>
-                  <RecoveryPassForm />
-                </AuthPage>
-              }
-            />
-            <Route>
+            <Route element={<AuthPage />}>
+              <Route path='/auth' element={<LoginForm />} />
+              <Route path='/registration' element={<RegisterForm />} />
+              <Route path='/forgot-pass' element={<RecoveryPassForm />} />
+            </Route>
+            <Route element={<ProtectedRoutes />}>
               <Route path='/' element={<Navigate to='/books/all' />} />
               <Route path='/books/:category' element={<MainPage />} />
               <Route path='/rules' element={<RulesPage />} />

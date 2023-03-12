@@ -6,6 +6,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import { forgotPassword, resetPassword } from '../../../redux/thunk/async/post-new-user';
 import { addNewPassword } from '../../../redux/user/user-actions';
+import { bigLetter, number } from '../../../validation/regular';
 import { validateEmail, validatePassword } from '../../../validation/validation';
 import { ButtonOrder } from '../../buttons/button-order';
 import { AuthError } from '../../error/auth-error';
@@ -25,6 +26,7 @@ export const RecoveryPassForm = () => {
   const loading = useSelector((state) => state.newUser.loading);
   const newPAssword = useSelector((state) => state.user.newPAssword);
   const [blurPassword, setBlurPassword] = useState(false);
+  const [disBtn, setDisBtn] = useState(false);
   const methods = useForm({
     mode: 'all',
   });
@@ -38,6 +40,7 @@ export const RecoveryPassForm = () => {
   const password = useRef({});
 
   password.current = watch('password', '');
+  const onValidation = (name, reg) => watch(name)?.match(reg);
 
   const onSubmit = (data) => {
     if (location.search) {
@@ -93,6 +96,9 @@ export const RecoveryPassForm = () => {
     );
   }
 
+  console.log(disBtn);
+  console.log(isValid);
+
   if (location.search) {
     return (
       <FormProvider {...methods}>
@@ -106,12 +112,12 @@ export const RecoveryPassForm = () => {
               label='Пароль'
               helpText='Пароль не менее 8 символов, с заглавной буквой и цифрой'
               required={true}
-              isDirty={getFieldState('password').isDirty}
+              isDirty={getFieldState(INPUT_TYPES.PASSWORD).isDirty}
               type={INPUT_TYPES.PASSWORD}
               errorMessage={errors.password?.message}
-              letter={watch('password')?.match(/[A-ZА-Я]/)}
-              num={watch('password')?.match(/[0-9]/)}
-              len={watch('password')?.length}
+              letter={onValidation(INPUT_TYPES.PASSWORD, bigLetter)}
+              num={onValidation(INPUT_TYPES.PASSWORD, number)}
+              len={watch(INPUT_TYPES.PASSWORD)?.length}
               onBlur={() => setBlurPassword(true)}
               onChange={() => setBlurPassword(false)}
               blur={blurPassword}
@@ -127,10 +133,24 @@ export const RecoveryPassForm = () => {
               required={true}
               type={INPUT_TYPES.PASSWORD}
               errorMessage={errors.passwordConfirmation?.message}
+              onBlur={() => {
+                setBlurPassword(false);
+                setDisBtn(false);
+              }}
+              onChange={() => {
+                setBlurPassword(true);
+                setDisBtn(true);
+              }}
+              blur={blurPassword}
             />
           </div>
           <div className={styles.descrWrapper}>
-            <ButtonOrder text='сохранить изменения' type='submit' dis={!isValid} />
+            <ButtonOrder
+              text='сохранить изменения'
+              type='submit'
+              dis={!isValid && !disBtn}
+              func={() => setDisBtn(false)}
+            />
             <p className={styles.descr}>После сохранения войдите в библиотеку, используя новый пароль</p>
           </div>
         </form>
