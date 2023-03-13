@@ -13,6 +13,7 @@ export const Header = () => {
   const isCategoriesError = useSelector((state) => state.categories.error);
   const isBooksLoading = useSelector((state) => state.books.loading);
   const isCategoriesLoading = useSelector((state) => state.categories.loading);
+  const userName = useSelector((state) => state.user.user);
 
   return (
     <header className={styles.header}>
@@ -23,7 +24,7 @@ export const Header = () => {
         <img className={styles.logo} src={Logo} alt='logo' />
         <h1 className={styles.title}>Библиотека</h1>
       </div>
-      <User />
+      <User name={userName.identifier} />
     </header>
   );
 };

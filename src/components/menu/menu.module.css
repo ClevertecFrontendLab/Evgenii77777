@@ -50,6 +50,14 @@
   position: relative;
 }
 
+.buttonLogout {
+  margin-top: 42px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.56;
+  color: #363636;
+}
+
 .wrapperFirsLink {
   display: flex;
   align-items: center;

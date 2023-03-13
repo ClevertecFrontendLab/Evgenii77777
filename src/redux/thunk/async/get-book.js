@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import { axiosInstance } from '../../api/api';
 
 export const getBook = createAsyncThunk('book/getBook', async (id, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`https://strapi.cleverland.by/api/books/${id}`);
+    const response = await axiosInstance.get(`https://strapi.cleverland.by/api/books/${id}`);
 
     return response.data;
   } catch (error) {

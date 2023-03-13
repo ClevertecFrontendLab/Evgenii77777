@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import Chevron from '../../assets/chevr.svg';
 import { Links } from '../../links';
@@ -11,16 +11,13 @@ import styles from './menu.module.css';
 export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCategoriesError }) => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const books = useSelector((state) => state.books.allBooks);
   const categories = useSelector((state) => state.categories.products);
 
   const onChangeCategory = (category, path) => {
     dispatch(addCategory(category));
     dispatch(addPath(path));
-    if (open) {
-      setOpen(false);
-    }
   };
 
   const onHandleChangeActive = (e) => {
@@ -36,7 +33,7 @@ export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCa
     if (location.pathname.includes('books')) {
       onOpenMenu();
     }
-  }, [location.pathname]);
+  }, [location.pathname, open]);
 
   const onCloseBurgerAndMenu = (index) => {
     if (index === 0) {
@@ -56,13 +53,13 @@ export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCa
           <li className={styles.item} key={el.name}>
             <div className={styles.wrapperFirsLink}>
               <NavLink
-                onClick={() => onCloseBurgerAndMenu(index)}
+                onClick={() => onCloseBurgerAndMenu(index, el)}
                 className={
                   location.pathname.includes('books') &&
                   el.path !== '/rules' &&
                   el.path !== '/treaty' &&
                   el.path !== '/profile' &&
-                  el.path !== '/exit'
+                  el.path !== '/auth'
                     ? styles.booksLink
                     : styles.menuLink
                 }
@@ -89,7 +86,6 @@ export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCa
                 ) : (
                   <li>
                     <NavLink
-                      data-test-id={burger ? 'burger-books' : 'navigation-books'}
                       className={({ isActive }) => (isActive ? 'activeLink' : '')}
                       to='/books/all'
                       onClick={() => onChangeCategory('Все книги', 'all')}
@@ -99,24 +95,17 @@ export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCa
                   </li>
                 )}
                 {categories &&
-                  categories.map((item) => (
+                  categories.map((item, i) => (
                     <li key={item.id}>
                       <NavLink
-                        data-test-id={burger ? `burger-${item.path}` : `navigation-${item.path}`}
+                        data-test-id={burger ? item.burger : item.test}
                         className={({ isActive }) => (isActive ? 'activeLink' : '')}
                         to={`/books/${item.path}`}
                         onClick={() => onChangeCategory(item.name, item.path)}
                       >
                         {item.name}
                       </NavLink>
-                      <span
-                        className={styles.quantity}
-                        data-test-id={
-                          burger ? `burger-book-count-for-${item.path}` : `navigation-book-count-for-${item.path}`
-                        }
-                      >
-                        {books.filter((book) => book.categories.includes(item.name)).length}
-                      </span>
+                      <span className={styles.quantity}>{i + 10}</span>
                     </li>
                   ))}
               </ul>
@@ -124,6 +113,17 @@ export const Menu = ({ setOpen, open = false, burger = false, isBooksError, isCa
           </li>
         ))}
       </ul>
+      <button
+        data-test-id={burger ? 'exit-button' : ''}
+        onClick={() => {
+          localStorage.setItem('JWT', '');
+          navigate('/auth');
+        }}
+        className={styles.buttonLogout}
+        type='button'
+      >
+        Выход
+      </button>
     </div>
   );
 };

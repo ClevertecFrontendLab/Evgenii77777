@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
 body {
   height: 100%;
   justify-content: center;
@@ -254,6 +256,14 @@ button {
 
 .swiper-pagination {
   display: none;
+}
+
+.inputError {
+  border-bottom: 1px solid #f42c4f;
+}
+
+.inputFocus {
+  padding: 26px 12px 12px !important;
 }
 
 @media (max-width: 1198.99px) {
