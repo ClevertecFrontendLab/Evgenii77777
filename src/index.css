@@ -1,16 +1,19 @@
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;900&display=swap');
+
+#root {
+    width: 100%;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+    line-height: 1.3;
     font-weight: 400;
-
-    color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-layout {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -24,34 +27,13 @@ a:hover {
 
 body {
     margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
     min-height: 100vh;
-}
-
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
+    display: flex;
+    box-sizing: border-box;
 }
 
 button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
     cursor: pointer;
-    transition: border-color 0.25s;
-}
-button:hover {
-    border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
@@ -64,5 +46,132 @@ button:focus-visible {
     }
     button {
         background-color: #f9f9f9;
+    }
+}
+
+.trigger {
+    position: absolute;
+    top: 50%;
+    right: -21px;
+    width: 20px;
+    height: 66px;
+    color: rgb(140, 140, 140);
+    background-color: #fff;
+    transform: perspective(10px) rotateY(10deg);
+    box-shadow: 4px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    border: none;
+}
+
+.ant-menu-inline-collapsed .anticon {
+    display: flex;
+}
+
+.ant-list [class^='ant-list'] {
+    border-block-end: none;
+}
+
+.ant-list .ant-list-header {
+    padding-block: 0;
+}
+
+.ant-card .ant-card-head {
+    padding: 12px 40px;
+    font-size: 16px;
+}
+
+.ant-card {
+    border-radius: 0;
+}
+
+.ant-card .ant-card-body {
+    padding: 12px 24px;
+}
+
+.ant-card .ant-card-actions > li:not(:last-child) {
+    border-inline-end: none;
+}
+
+.ant-card .ant-card-meta-title {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: rgb(47, 84, 235);
+}
+
+.ant-card-meta-description {
+    color: rgb(140, 140, 140);
+}
+
+.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover,
+.ant-btn-text:not(:disabled):not(.ant-btn-disabled):focus,
+.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover,
+.ant-btn-text:not(:disabled):not(.ant-btn-disabled):focus,
+.ant-btn:hover,
+.ant-btn:focus {
+    border: none;
+}
+
+.ant-btn.ant-btn-icon-only {
+    width: 20px;
+}
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    color: rgb(140, 140, 140);
+}
+
+.ant-layout .ant-layout-sider {
+    box-shadow: 4px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+    .ant-row {
+        flex-flow: nowrap;
+    }
+
+    .ant-card .ant-card-head-title {
+        white-space: normal;
+        text-align: left;
+    }
+}
+
+@media (max-width: 767.99px) {
+    .ant-row {
+        display: block;
+    }
+
+    .ant-col {
+        margin-bottom: 8px;
+    }
+
+    .ant-card-meta-detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ant-btn:not(.ant-btn-icon-only) > .ant-btn-icon:not(:last-child) {
+        margin-inline-end: 0;
+    }
+
+    h5.ant-typography {
+        margin-bottom: 24px;
+    }
+
+    .trigger {
+        width: 32px;
+        height: 48px;
+        top: 24px;
+    }
+
+    .trigger > svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .ant-layout .ant-layout-sider {
+        z-index: 1;
+        height: 100vh;
+        position: absolute;
+        box-shadow: 4px 2px 8px rgba(0, 0, 0, 0.15);
     }
 }
