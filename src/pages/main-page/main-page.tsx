@@ -10,6 +10,7 @@ import {
     AppleFilled,
 } from '@ant-design/icons';
 import { Layout, Menu, Typography, Button, List, Card, Col, Row } from 'antd';
+import 'antd/dist/antd.css';
 import { Nav } from '@components/nav/nav';
 
 import Logo from './assets/logo.png';
