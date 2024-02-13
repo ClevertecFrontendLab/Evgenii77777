@@ -1,0 +1,188 @@
+.logoFull {
+    margin-left: 14px;
+}
+
+.logo {
+    margin-left: 0;
+}
+
+.sider {
+    padding: 30px 16px 0;
+}
+
+.sider > div > span {
+    color: black;
+}
+
+.sider > div > span > svg {
+    transform: perspective(10px) rotateY(-10deg);
+}
+
+.siderMobile,
+.siderMobilefull {
+    display: none;
+}
+
+.menu {
+    margin: 50px 0 0;
+}
+
+.layout {
+    height: 100%;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+.way,
+.title {
+    margin: 0;
+    padding: 0;
+}
+
+h1.title {
+    font-size: 38px;
+    font-weight: 700;
+}
+
+.container {
+    background-image: url(./assets/back.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.box {
+    display: grid;
+    grid-template-columns: 76% 24%;
+}
+
+.settings {
+    margin-left: auto;
+    padding: 8px 15px;
+}
+
+.main {
+    padding: 16px 24px 24px;
+}
+
+.list,
+.phrase {
+    max-width: 752px;
+    padding: 24px;
+    font-size: 16px;
+    color: rgb(6, 17, 120);
+    background-color: #fff;
+}
+
+.text {
+    font-size: 16px;
+    color: rgb(6, 17, 120);
+}
+
+.phrase {
+    margin: 24px 0 16px;
+    color: rgb(38, 38, 38);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.icon {
+    margin: 8px 8px 8px 0;
+}
+
+.card {
+    text-align: center;
+    color: rgb(47, 84, 235);
+    font-size: 14px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 156px 24px 42px;
+    background: none;
+}
+
+.review {
+    height: auto;
+    margin-top: auto;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: rgb(47, 84, 235);
+}
+
+.wrap > div {
+    padding: 12px 24px;
+}
+
+.os {
+    height: auto;
+    padding: 6px 12px;
+    line-height: 1.3;
+    color: rgb(38, 38, 38);
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+    h1.title {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .iconSetting {
+        display: none;
+    }
+}
+
+@media (max-width: 767.99px) {
+    h1.title {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .settings {
+        width: 32px;
+        height: 32px;
+        align-items: center;
+        display: flex;
+        padding: 2px;
+        border: 1px solid rgb(217, 217, 217);
+        box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.04);
+        border-radius: 50%;
+        background-color: #fff;
+    }
+
+    .settingsText {
+        font-size: 0;
+    }
+
+    .footer {
+        flex-direction: column-reverse;
+        padding-top: 18px;
+    }
+
+    .sider {
+        display: none;
+    }
+
+    .siderMobile,
+    .siderMobilefull {
+        display: block;
+        padding: 16px 8px 0;
+    }
+
+    .siderMobilefull {
+        padding: 0;
+    }
+
+    .logoMob {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .tag {
+        margin-left: 0;
+    }
+
+    .iconSetting {
+        padding-left: 6px;
+    }
+}
