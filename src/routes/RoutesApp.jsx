@@ -8,10 +8,10 @@ import { ProtectedRoutes } from './protected-routes';
 import { ConfirmEmail } from '@components/form/confirm-email';
 import { ChangePass } from '@components/form/change-pass';
 import { AuthForm } from '@components/form/auth-form';
+import { Loader } from '@components/loader';
 
 import 'normalize.css';
 import '../index.css';
-import { Loader } from '@components/loader';
 
 export const RoutesApp = () => {
     const MainPageLazy = lazy(() => import('@pages/main-page/main-page'));
