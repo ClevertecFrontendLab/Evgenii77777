@@ -1,0 +1,116 @@
+.wrapper {
+    height: 100vh;
+    width: 100%;
+}
+
+.container,
+.containerPass {
+    position: absolute;
+    top: 150px;
+    left: calc(50% - 270px);
+    padding: 64px 85px 174px;
+    width: 540px;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+}
+
+.containerPass {
+    padding: 64px 85px;
+}
+
+.logo {
+    margin-bottom: 48px;
+}
+
+.list {
+    display: grid;
+    padding: 0;
+    margin-bottom: 24px;
+    grid-template-columns: 50% 50%;
+}
+
+.link {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    color: rgb(38, 38, 38);
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+a.activeLink {
+    font-size: 16px;
+    line-height: 1.3;
+    color: rgb(47, 84, 235);
+    color: rgb(47, 84, 235);
+    border-bottom: 2px solid rgb(47, 84, 235);
+}
+
+.rememberBtn {
+    padding: 0;
+    margin-left: auto;
+    color: rgb(47, 84, 235);
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+.box > div > div > div > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.enterBtn,
+.enterBtn:focus,
+.enterBtn:hover,
+.googleBtn {
+    padding: 10px 0;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.3%;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(47, 84, 235);
+    border-radius: 2px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.04);
+    background: rgb(47, 84, 235);
+}
+
+.googleBtn,
+.googleBtn:focus,
+.googleBtn:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    color: rgb(38, 38, 38);
+    border: 1px solid rgb(217, 217, 217);
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.02);
+    background: rgb(255, 255, 255);
+}
+
+.form {
+    text-align: left;
+}
+
+.boxConfirm {
+    margin-top: 54px;
+}
+
+.confirm {
+    margin-top: 48px;
+}
+
+@media (max-width: 767px) {
+    .container,
+    .containerPass {
+        padding: 32px 16px;
+        width: 328px;
+        left: calc(50% - 164px);
+    }
+
+    .logo {
+        width: 200px;
+        height: 50px;
+        margin-bottom: 32px;
+    }
+}
