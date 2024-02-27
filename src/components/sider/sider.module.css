@@ -1,0 +1,53 @@
+.logoFull {
+    margin-left: 14px;
+}
+
+.logo {
+    margin-left: 0;
+}
+
+.sider {
+    padding: 30px 16px 0;
+}
+
+.sider > div > span {
+    color: black;
+}
+
+.sider > div > span > svg {
+    transform: perspective(10px) rotateY(-10deg);
+}
+
+.siderMobile,
+.siderMobilefull {
+    display: none;
+}
+
+.menu {
+    margin: 50px 0 0;
+}
+
+@media (max-width: 767.99px) {
+    .sider {
+        display: none;
+    }
+
+    .siderMobile,
+    .siderMobilefull {
+        display: block;
+        padding: 16px 8px 0;
+    }
+
+    .siderMobilefull {
+        padding: 0;
+    }
+
+    .logoMob {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .tag {
+        margin-left: 0;
+    }
+}

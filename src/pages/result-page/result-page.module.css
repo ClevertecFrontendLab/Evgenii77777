@@ -1,0 +1,91 @@
+.box {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.wrapper {
+    position: absolute;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 64px 85px;
+    border-radius: 2px;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+    background: rgb(255, 255, 255);
+}
+
+h2.title {
+    margin: 24px 0 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: rgb(38, 38, 38);
+}
+
+h2.titleErr {
+    font-size: 22px;
+}
+
+div.text {
+    margin: 0 auto 24px;
+    max-width: 346px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: rgb(140, 140, 140);
+}
+
+div.textSuccess {
+    max-width: 300px;
+}
+
+.btnSend,
+.btnSend:focus,
+.btnSend:hover {
+    height: auto;
+    width: 368px;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(47, 84, 235);
+    border-radius: 2px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.04);
+    background: rgb(47, 84, 235);
+}
+
+.btnSendErr {
+    width: 170px;
+    margin: 0 auto;
+}
+
+.btnSendError {
+    width: 74px;
+    margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+    .wrapper {
+        padding: 32px 16px;
+        width: 328px;
+    }
+
+    .btnSend {
+        width: 100%;
+    }
+
+    .btnSendErr {
+        width: 170px;
+        margin: 0 auto;
+    }
+
+    .btnSendError {
+        width: 74px;
+        margin: 0 auto;
+    }
+}

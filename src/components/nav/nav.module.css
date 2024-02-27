@@ -35,6 +35,11 @@
     margin-left: 10px;
 }
 
+.navBtn {
+    border: none;
+    background: inherit;
+}
+
 @media (max-width: 767.99px) {
     .icon {
         display: none;
