@@ -1,41 +1,16 @@
-import Heart from './assets/heart.svg';
-import Calendar from './assets/calendar.svg';
-import Profile from './assets/profile.svg';
-import Cup from './assets/cup.svg';
-import Exit from './assets/exit.svg';
-
-import styles from './nav.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const items = [
-    {
-        icon: Calendar,
-        label: 'Календарь',
-    },
-    {
-        icon: Heart,
-        label: 'Тренировки',
-    },
-    {
-        icon: Cup,
-        label: 'Достижения',
-    },
-    {
-        icon: Profile,
-        label: 'Профиль',
-    },
-    {
-        icon: Exit,
-        label: 'Выход',
-    },
-];
+import { dataItems } from './data-items';
+import { Path } from '@constants/path';
+
+import styles from './nav.module.css';
 
 export const Nav = ({ collapsed }) => {
     const navigate = useNavigate();
 
     return (
         <>
-            {items.map((el) => (
+            {dataItems.map((el) => (
                 <li key={el.label} className={!collapsed ? styles.item : styles.itemMini}>
                     <button
                         className={styles.navBtn}
@@ -44,7 +19,7 @@ export const Nav = ({ collapsed }) => {
                                 ? () => {
                                       localStorage.clear();
                                       sessionStorage.clear();
-                                      navigate('/auth');
+                                      navigate(Path.AUTH);
                                   }
                                 : ''
                         }

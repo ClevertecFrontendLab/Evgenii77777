@@ -15,36 +15,16 @@
     background: #fff;
 }
 
+.containerReg {
+    padding: 64px 85px;
+}
+
 .containerPass {
     padding: 64px 85px;
 }
 
 .logo {
     margin-bottom: 48px;
-}
-
-.list {
-    display: grid;
-    padding: 0;
-    margin-bottom: 24px;
-    grid-template-columns: 50% 50%;
-}
-
-.link {
-    display: block;
-    width: 100%;
-    padding: 12px 0;
-    font-size: 16px;
-    color: rgb(38, 38, 38);
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-
-a.activeLink {
-    font-size: 16px;
-    line-height: 1.3;
-    color: rgb(47, 84, 235);
-    color: rgb(47, 84, 235);
-    border-bottom: 2px solid rgb(47, 84, 235);
 }
 
 .rememberBtn {
@@ -55,9 +35,17 @@ a.activeLink {
     line-height: 1.3;
 }
 
+.box {
+    margin-bottom: 0;
+}
+
 .box > div > div > div > div {
     display: flex;
     flex-direction: column;
+}
+
+.boxReg {
+    margin-top: 32px;
 }
 
 .enterBtn,
@@ -100,6 +88,10 @@ a.activeLink {
     margin-top: 48px;
 }
 
+.googleImg {
+    margin-right: 4px;
+}
+
 @media (max-width: 767px) {
     .container,
     .containerPass {
@@ -111,5 +103,9 @@ a.activeLink {
         width: 200px;
         height: 50px;
         margin-bottom: 32px;
+    }
+
+    .googleImg {
+        display: none;
     }
 }

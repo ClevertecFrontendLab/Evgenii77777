@@ -4,7 +4,6 @@ import { Form, Input, Button, Checkbox } from 'antd';
 
 import { forgotPassword } from '@redux/thunk/async/post-user';
 import { emailReg } from '@components/validation/validation';
-import { addEmail } from '@redux/actions/post-user';
 
 import styles from '../../../pages/auth-page/auth-page.module.css';
 
@@ -16,7 +15,7 @@ export const AuthForm = ({ email, form }) => {
         form.validateFields(['email'])
             .then(() => {
                 dispatch(forgotPassword(email));
-                dispatch(addEmail(email));
+                localStorage.setItem('email', email);
             })
             .catch((err) => console.log(err));
     };

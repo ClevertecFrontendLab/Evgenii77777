@@ -1,20 +1,13 @@
 import { useSelector } from 'react-redux';
 import Lottie from 'react-lottie';
-import animationData from './base-loader.json';
+
+import { defaultOptions } from '@constants/constant';
+import { loadinglSelector } from '@constants/selector';
 
 import styles from './loader.module.css';
 
 export const Loader = () => {
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
-        },
-    };
-
-    const authLoader = useSelector((state) => state.login.loading);
+    const authLoader = useSelector(loadinglSelector);
 
     return (
         <>

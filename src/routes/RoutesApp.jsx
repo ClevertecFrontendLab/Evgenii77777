@@ -9,6 +9,7 @@ import { ConfirmEmail } from '@components/form/confirm-email';
 import { ChangePass } from '@components/form/change-pass';
 import { AuthForm } from '@components/form/auth-form';
 import { Loader } from '@components/loader';
+import { Path } from '@constants/path';
 
 import 'normalize.css';
 import '../index.css';
@@ -18,16 +19,16 @@ export const RoutesApp = () => {
     return (
         <Routes>
             <Route element={<AuthPage />}>
-                <Route path='/auth' element={<AuthForm />} />
-                <Route path='/auth/registration' element={<RegForm />} />
-                <Route path='/auth/confirm-email' element={<ConfirmEmail />} />
-                <Route path='/auth/change-password' element={<ChangePass />} />
+                <Route path={Path.AUTH} element={<AuthForm />} />
+                <Route path={Path.REGISTRATION} element={<RegForm />} />
+                <Route path={Path.CONFIRM_EMAIL} element={<ConfirmEmail />} />
+                <Route path={Path.CHANGE_PASS} element={<ChangePass />} />
             </Route>
             <Route element={<ProtectedRoutes />}>
                 <Route>
-                    <Route path='/' element={<Navigate to='/main' />} />
+                    <Route path={Path.HOME} element={<Navigate to={Path.MAIN} />} />
                     <Route
-                        path='/main'
+                        path={Path.MAIN}
                         element={
                             <Suspense fallback={<Loader />}>
                                 <MainPageLazy />
@@ -35,33 +36,16 @@ export const RoutesApp = () => {
                         }
                     />
                 </Route>
-                <Route path='/result' element={<ResultPage />}>
-                    <Route
-                        path='/result/error-login'
-                        element={<ResultPage mode={'error-login'} />}
-                    />
-                    <Route path='/result/success' element={<ResultPage mode={'success'} />} />
-                    <Route
-                        path='/result/error-user-exist'
-                        element={<ResultPage mode={'error-user-exist'} />}
-                    />
-                    <Route
-                        path='/result/error-check-email-no-exist'
-                        element={<ResultPage mode={'error-check-email-no-exist'} />}
-                    />
-                    <Route
-                        path='/result/error-check-email'
-                        element={<ResultPage mode={'error-check-email'} />}
-                    />
-                    <Route
-                        path='/result/error-change-password'
-                        element={<ResultPage mode={'error-change-password'} />}
-                    />
-                    <Route
-                        path='/result/success-change-password'
-                        element={<ResultPage mode={'success-change-password'} />}
-                    />
-                    <Route path='/result/error' element={<ResultPage mode={'error'} />} />
+                <Route path={Path.RESULT} element={<ResultPage />}>
+                    <Route path={Path.ERROR_LOGIN} element={<ResultPage />} />
+                    <Route path={Path.SUCCESS} element={<ResultPage />} />
+                    <Route path={Path.ERROR_USER_EXIST} element={<ResultPage />} />
+                    <Route path={Path.ERRR0R_CHEK_EMAIL_NO_EXIST} element={<ResultPage />} />
+                    <Route path={Path.ERROR_CHECK_EMAIL} element={<ResultPage />} />
+                    <Route path={Path.ERROR_USER_EXIST} element={<ResultPage />} />
+                    <Route path={Path.ERROR_CHANGE_PASS} element={<ResultPage />} />
+                    <Route path={Path.SUCCES_CHANGE_PASS} element={<ResultPage />} />
+                    <Route path={Path.ERROR} element={<ResultPage />} />
                 </Route>
             </Route>
         </Routes>

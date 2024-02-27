@@ -4,9 +4,8 @@
     bottom: -150px;
     right: 0;
     left: 0;
-    background-image: url(./assets/back.jpg);
+    background-image: url(./assets/back.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(12px);
 }

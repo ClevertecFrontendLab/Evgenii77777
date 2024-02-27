@@ -8,6 +8,8 @@ import { addUser } from '@redux/actions/post-user';
 
 import styles from '../confirm-email/confirm-email.module.css';
 
+const { Title } = Typography;
+
 export const ChangePass = () => {
     const dispatch = useDispatch();
     const onFinish = (values) => {
@@ -22,12 +24,10 @@ export const ChangePass = () => {
         },
     };
 
-    const { Title } = Typography;
-
     return (
         <>
             <Title className={styles.title} level={3}>
-                Восстановление аккауанта
+                Восстановление аккаунта
             </Title>
             <Form className={styles.form} validateMessages={validateMessages} onFinish={onFinish}>
                 <Form.Item
@@ -44,7 +44,7 @@ export const ChangePass = () => {
                     hasFeedback
                     help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                 >
-                    <Input.Password placeholder='Пароль' data-test-id='change-password' />
+                    <Input.Password placeholder='Новый пароль' data-test-id='change-password' />
                 </Form.Item>
                 <Form.Item
                     className={styles.confirm}

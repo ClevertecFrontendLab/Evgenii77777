@@ -12,6 +12,16 @@ import { addUser, deleteType } from '@redux/actions/post-user';
 import { AuthForm } from '@components/form/auth-form';
 import { RegForm } from '@components/form/reg-form';
 
+import { TYPE } from '@constants/type';
+import { Path } from '@constants/path';
+import { TabLink } from '@components/tab-link';
+import {
+    isErrorSelector,
+    messageSelector,
+    statusSelector,
+    typeSelector,
+} from '@constants/selector';
+
 import Logo from './assets/logo.png';
 import styles from './auth-page.module.css';
 
@@ -20,46 +30,46 @@ export const AuthPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [emailValid, setEmailValid] = useState(false);
-    const isError = useSelector((state) => state.login.error);
-    const status = useSelector((state) => state.login.status);
-    const type = useSelector((state) => state.login.type);
-    const message = useSelector((state) => state.login.message);
+    const isError = useSelector(isErrorSelector);
+    const status = useSelector(statusSelector);
+    const type = useSelector(typeSelector);
+    const message = useSelector(messageSelector);
     const [form] = Form.useForm();
 
     useEffect(() => {
-        if (isError && type === 'login') {
-            navigate('/result/error-login');
-        } else if (type === 'login' && !isError) {
-            navigate('/main');
+        if (isError && type === TYPE.LOGIN) {
+            navigate(Path.ERROR_LOGIN);
+        } else if (type === TYPE.LOGIN && !isError) {
+            navigate(Path.MAIN);
             dispatch(deleteType(''));
-        } else if (!isError && type === 'registration') {
-            navigate('/result/success');
-        } else if (status === 409 && type === 'registration') {
-            navigate('/result/error-user-exist');
-        } else if (status !== 409 && type === 'registration' && isError) {
-            navigate('/result/error');
-        } else if (type === 'forgot' && !isError) {
-            navigate('/auth/confirm-email');
+        } else if (!isError && type === TYPE.REGISTRATION) {
+            navigate(Path.SUCCESS);
+        } else if (status === 409 && type === TYPE.REGISTRATION) {
+            navigate(Path.ERROR_USER_EXIST);
+        } else if (status !== 409 && type === TYPE.REGISTRATION && isError) {
+            navigate(Path.ERROR);
+        } else if (type === TYPE.FORGOT && !isError) {
+            navigate(Path.CONFIRM_EMAIL);
             dispatch(deleteType(''));
-        } else if (type === 'forgot' && message === 'Email не найден' && isError) {
-            navigate('/result/error-check-email-no-exist');
-        } else if (type === 'forgot' && isError && message !== 'Email не найден') {
-            navigate('/result/error-check-email');
-        } else if (type === 'confirm' && !isError) {
-            navigate('/auth/change-password');
+        } else if (type === TYPE.FORGOT && message === 'Email не найден' && isError) {
+            navigate(Path.ERRR0R_CHEK_EMAIL_NO_EXIST);
+        } else if (type === TYPE.FORGOT && isError && message !== 'Email не найден') {
+            navigate(Path.ERROR_CHECK_EMAIL);
+        } else if (type === TYPE.CONFIRM && !isError) {
+            navigate(Path.CHANGE_PASS);
             dispatch(deleteType(''));
-        } else if (type === 'change' && isError) {
-            navigate('/result/error-change-password');
-        } else if (type === 'change' && !isError) {
-            navigate('/result/success-change-password');
+        } else if (type === TYPE.CHANGE && isError) {
+            navigate(Path.ERROR_CHANGE_PASS);
+        } else if (type === TYPE.CHANGE && !isError) {
+            navigate(Path.SUCCES_CHANGE_PASS);
         }
     }, [dispatch, isError, message, navigate, status, type]);
 
     const onFinish = (values) => {
-        location.pathname === '/auth'
+        location.pathname === Path.AUTH
             ? dispatch(postLogin(values)).then(() => {
                   if (localStorage.getItem('JWT') || sessionStorage.getItem('JWTSession')) {
-                      navigate('/main');
+                      navigate(Path.MAIN);
                   }
               }) && dispatch(addUser(values))
             : dispatch(
@@ -90,41 +100,15 @@ export const AuthPage = () => {
             <div
                 className={cn(styles.container, {
                     [styles.containerPass]:
-                        location.pathname === '/auth/change-password' ||
-                        location.pathname === '/auth/confirm-email',
+                        location.pathname === Path.CHANGE_PASS ||
+                        location.pathname === Path.CONFIRM_EMAIL,
+                    [styles.containerReg]: location.pathname === Path.REGISTRATION,
                 })}
             >
-                {(location.pathname === '/auth' || location.pathname === '/auth/registration') && (
+                {(location.pathname === Path.AUTH || location.pathname === Path.REGISTRATION) && (
                     <>
                         <img className={styles.logo} src={Logo} alt='logo' />
-                        <ul className={styles.list}>
-                            <li className={styles.item}>
-                                <NavLink
-                                    className={({ isActive }) =>
-                                        cn(styles.link, {
-                                            [styles.activeLink]: isActive,
-                                        })
-                                    }
-                                    to={'/auth'}
-                                    end
-                                >
-                                    Вход
-                                </NavLink>
-                            </li>
-                            <li className={styles.item}>
-                                <NavLink
-                                    className={({ isActive }) =>
-                                        cn(styles.link, {
-                                            [styles.activeLink]: isActive,
-                                        })
-                                    }
-                                    to={'/auth/registration'}
-                                    end
-                                >
-                                    Регистрация
-                                </NavLink>
-                            </li>
-                        </ul>
+                        <TabLink />
                         <Form
                             className={styles.form}
                             validateMessages={validateMessages}
@@ -138,17 +122,17 @@ export const AuthPage = () => {
                                 )
                             }
                         >
-                            {location.pathname === '/auth' && (
+                            {location.pathname === Path.AUTH && (
                                 <AuthForm email={form.getFieldValue('email')} form={form} />
                             )}
-                            {location.pathname === '/auth/registration' && <RegForm />}
-                            <Form.Item className={styles.box}>
+                            {location.pathname === Path.REGISTRATION && <RegForm />}
+                            <Form.Item className={styles.box} style={{ marginBottom: '0' }}>
                                 <Button
                                     className={styles.enterBtn}
                                     type='primary'
                                     htmlType='submit'
                                     data-test-id={
-                                        location.pathname === '/auth'
+                                        location.pathname === Path.AUTH
                                             ? 'login-submit-button'
                                             : 'registration-submit-button'
                                     }
@@ -156,16 +140,18 @@ export const AuthPage = () => {
                                     Войти
                                 </Button>
                                 <Button className={styles.googleBtn} type='primary'>
-                                    <GooglePlusOutlined />
-                                    {location.pathname === '/auth' ? 'Войти ' : 'Регистрация '}{' '}
+                                    <div className={styles.googleImg}>
+                                        <GooglePlusOutlined />
+                                    </div>
+                                    {location.pathname === Path.AUTH ? 'Войти ' : 'Регистрация '}{' '}
                                     через Google
                                 </Button>
                             </Form.Item>
                         </Form>
                     </>
                 )}
-                {(location.pathname === '/auth/confirm-email' ||
-                    location.pathname === '/auth/change-password') && <Outlet />}
+                {(location.pathname === Path.CONFIRM_EMAIL ||
+                    location.pathname === Path.CHANGE_PASS) && <Outlet />}
             </div>
         </section>
     );

@@ -16,7 +16,7 @@ export const dataMode = [
     {
         type: '/result/error-user-exist',
         title: 'Данные не сохранились',
-        text: 'Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.',
+        text: 'Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.',
         textBtn: 'Назад к регистрации',
         id: 'registration-back-button',
     },
