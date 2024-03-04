@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { createReduxHistoryContext } from "redux-first-history";
 import { createBrowserHistory } from "history";
 import { loginReducer } from "./thunk/redusers/post-user";
+import { feedbacksReducer } from "./thunk/redusers/feedbacks";
 
 const {
   createReduxHistory,
@@ -13,7 +14,8 @@ const {
 
 const rootReducer =  combineReducers({
   router: routerReducer,
-  login:loginReducer.reducer
+  login: loginReducer.reducer,
+  feedbacks:feedbacksReducer.reducer
   })
 
 

@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import { AuthPage } from '@pages/auth-page';
 import { RegForm } from '@components/form/reg-form';
@@ -8,6 +8,7 @@ import { ProtectedRoutes } from './protected-routes';
 import { ConfirmEmail } from '@components/form/confirm-email';
 import { ChangePass } from '@components/form/change-pass';
 import { AuthForm } from '@components/form/auth-form';
+import { FeedbacksPage } from '@pages/feedbacks-page';
 import { Loader } from '@components/loader';
 import { Path } from '@constants/path';
 
@@ -15,7 +16,20 @@ import 'normalize.css';
 import '../index.css';
 
 export const RoutesApp = () => {
+    const navigate = useNavigate();
     const MainPageLazy = lazy(() => import('@pages/main-page/main-page'));
+
+    useEffect(() => {
+        window.addEventListener('beforeunload', function () {
+            sessionStorage.clear();
+        });
+        if (
+            localStorage.getItem('JWT') === 'undefined' &&
+            sessionStorage.getItem('JWTSession') === 'undefined'
+        ) {
+            navigate(Path.AUTH);
+        }
+    }, [navigate]);
     return (
         <Routes>
             <Route element={<AuthPage />}>
@@ -47,6 +61,7 @@ export const RoutesApp = () => {
                     <Route path={Path.SUCCES_CHANGE_PASS} element={<ResultPage />} />
                     <Route path={Path.ERROR} element={<ResultPage />} />
                 </Route>
+                <Route path={Path.FEEDBACKS} element={<FeedbacksPage />} />
             </Route>
         </Routes>
     );

@@ -22,9 +22,19 @@ a {
 }
 
 body {
+    min-height: 100%;
+    height: auto;
     margin: 0;
     display: flex;
     box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body::-webkit-scrollbar-track {
+    display: none;
 }
 
 button {
@@ -47,6 +57,10 @@ ul {
 .ant-checkbox-checked .ant-checkbox-inner {
     border-radius: 2px;
     background: rgb(47, 84, 235);
+}
+
+.ant-list-item-meta-avatar {
+    margin-right: 0;
 }
 
 @media (prefers-color-scheme: light) {
@@ -122,6 +136,18 @@ ul {
     border: none;
 }
 
+.ant-btn-primary,
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 2px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.04);
+    border: none;
+    color: rgb(255, 255, 255);
+    background: rgb(47, 84, 235);
+}
+
 .ant-btn.ant-btn-icon-only {
     width: 20px;
 }
@@ -169,6 +195,23 @@ ul {
 .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
 .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover {
     border-left: 1px solid rgb(217, 217, 217);
+}
+
+.ant-list-item-meta-content {
+    width: auto;
+}
+
+.ant-modal-body {
+    padding: 0;
+}
+
+.ant-list-item-meta-title {
+    width: min-content;
+}
+
+.ant-modal-mask {
+    backdrop-filter: blur(2px);
+    background: rgba(121, 156, 213, 0.5);
 }
 
 @media (min-width: 768px) and (max-width: 1100px) {
@@ -221,5 +264,14 @@ ul {
         height: 100vh;
         position: absolute;
         box-shadow: 4px 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .ant-modal {
+        padding: 0 20px;
+    }
+
+    .ant-modal-content {
+        max-width: 540px;
+        margin: 0 auto;
     }
 }

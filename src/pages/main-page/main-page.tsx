@@ -1,39 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Layout } from 'antd';
-
 import { HeaderMain } from '@components/header';
 import { ContentMain } from '@components/content';
 import { FooterMain } from '@components/footer';
-import { SiderDesc } from '@components/sider/sider-desc';
-import { SiderMob } from '@components/sider/sider-mob';
-
-import 'antd/dist/antd.css';
-import styles from './main-page.module.css';
+import { LayoutMain } from '@components/layout';
 
 const MainPage = () => {
-    const navigate = useNavigate();
-    const [collapsed, setCollapsed] = useState(false);
-
-    useEffect(() => {
-        if (
-            localStorage.getItem('JWT') === 'undefined' &&
-            sessionStorage.getItem('JWTSession') === 'undefined'
-        ) {
-            navigate('/auth');
-        }
-    }, [navigate]);
+    const routes = [
+        {
+            name: 'Главная',
+        },
+    ];
 
     return (
-        <Layout className={styles.layout}>
-            <SiderDesc collapsed={collapsed} setCollapsed={setCollapsed} />
-            <SiderMob collapsed={collapsed} setCollapsed={setCollapsed} />
-            <Layout className={styles.container} style={{ width: '100%' }}>
-                <HeaderMain />
-                <ContentMain />
-                <FooterMain />
-            </Layout>
-        </Layout>
+        <LayoutMain routes={routes}>
+            <HeaderMain />
+            <ContentMain />
+            <FooterMain />
+        </LayoutMain>
     );
 };
 

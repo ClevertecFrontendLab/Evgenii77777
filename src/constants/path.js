@@ -2,6 +2,7 @@ export const Path = {
     HOME: '/',
     AUTH: '/auth',
     MAIN: '/main',
+    FEEDBACKS: '/feedbacks',
     REGISTRATION: '/auth/registration',
     CONFIRM_EMAIL: '/auth/confirm-email',
     CHANGE_PASS: '/auth/change-password',
