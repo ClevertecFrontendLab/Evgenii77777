@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { Button, Form } from 'antd';
@@ -11,7 +11,6 @@ import { postLogin, postReg } from '@redux/thunk/async/post-user';
 import { addUser, deleteType } from '@redux/actions/post-user';
 import { AuthForm } from '@components/form/auth-form';
 import { RegForm } from '@components/form/reg-form';
-
 import { TYPE } from '@constants/type';
 import { Path } from '@constants/path';
 import { TabLink } from '@components/tab-link';
@@ -21,6 +20,8 @@ import {
     statusSelector,
     typeSelector,
 } from '@constants/selector';
+import { history } from '@redux/configure-store';
+import { baseURL } from '@redux/api/api';
 
 import Logo from './assets/logo.png';
 import styles from './auth-page.module.css';
@@ -94,6 +95,11 @@ export const AuthPage = () => {
         },
     };
 
+    const signInGoogleHandler = () => {
+        window.location.href = `${baseURL}/auth/google`;
+        localStorage.setItem('JWT', history.location.state.from.search.split('=')[1]);
+    };
+
     return (
         <section className={styles.wrapper}>
             <Overlay />
@@ -139,7 +145,11 @@ export const AuthPage = () => {
                                 >
                                     Войти
                                 </Button>
-                                <Button className={styles.googleBtn} type='primary'>
+                                <Button
+                                    className={styles.googleBtn}
+                                    type='primary'
+                                    onClick={signInGoogleHandler}
+                                >
                                     <div className={styles.googleImg}>
                                         <GooglePlusOutlined />
                                     </div>

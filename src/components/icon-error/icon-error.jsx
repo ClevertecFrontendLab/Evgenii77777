@@ -9,6 +9,12 @@ import {
 import 'antd/dist/antd.css';
 
 import { Path } from '@constants/path';
+import {
+    feedbacksErrorSelector,
+    feedbacksMessageSelector,
+    feedbacksTypeSelector,
+    isErrorSelector,
+} from '@constants/selector';
 
 import Back from './assets/image.png';
 
@@ -16,7 +22,11 @@ import styles from './icon-error.module.css';
 
 export const IconError = () => {
     const location = useLocation();
-    const isError = useSelector((state) => state.login.error);
+    const isError = useSelector(isErrorSelector);
+    const isErrorFeedbacks = useSelector(feedbacksErrorSelector);
+    const typeFeedbacks = useSelector(feedbacksTypeSelector);
+    const messageFeed = useSelector(feedbacksMessageSelector);
+
     const error =
         location.pathname.includes('error') &&
         location.pathname !== Path.ERROR_LOGIN &&
@@ -35,13 +45,17 @@ export const IconError = () => {
                 <WarningFilled className={styles.icon} style={{ color: ' rgb(250, 173, 20) ' }} />
             )}
             {(location.pathname === Path.SUCCESS ||
-                location.pathname === Path.SUCCES_CHANGE_PASS) && (
+                location.pathname === Path.SUCCES_CHANGE_PASS ||
+                (typeFeedbacks === 'feedbacks' && !messageFeed)) && (
                 <CheckCircleFilled className={styles.icon} style={{ color: 'rgb(82, 196, 26) ' }} />
             )}
-            {(error || errorAuth) && (
+            {(error || errorAuth || (typeFeedbacks === 'feedbacks' && messageFeed)) && (
                 <CloseCircleFilled className={styles.icon} style={{ color: 'rgb(255, 77, 79) ' }} />
             )}
-            {location.pathname === Path.ERROR_CHECK_EMAIL && <img src={Back} alt='icon-error' />}
+            {(location.pathname === Path.ERROR_CHECK_EMAIL ||
+                (location.pathname === Path.FEEDBACKS && !typeFeedbacks)) && (
+                <img className={styles.imgError} src={Back} alt='icon-error' />
+            )}
         </>
     );
 };

@@ -8,6 +8,7 @@
 
 .sider {
     padding: 30px 16px 0;
+    z-index: 1;
 }
 
 .sider > div > span {

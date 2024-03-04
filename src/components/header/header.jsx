@@ -9,9 +9,6 @@ const { Header } = Layout;
 
 export const HeaderMain = () => (
     <Header className={styles.header}>
-        <Title className={styles.way} level={5}>
-            Главная
-        </Title>
         <div className={styles.box}>
             <Title className={styles.title} style={{ margin: 0 }}>
                 Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей

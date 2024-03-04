@@ -48,10 +48,10 @@
     margin-top: 32px;
 }
 
-.enterBtn,
-.enterBtn:focus,
-.enterBtn:hover,
-.googleBtn {
+button.enterBtn,
+button.enterBtn:focus,
+button.enterBtn:hover,
+button.googleBtn {
     padding: 10px 0;
     width: 100%;
     font-size: 16px;
@@ -63,9 +63,9 @@
     background: rgb(47, 84, 235);
 }
 
-.googleBtn,
-.googleBtn:focus,
-.googleBtn:hover {
+button.googleBtn,
+button.googleBtn:focus,
+button.googleBtn:hover {
     display: flex;
     align-items: center;
     justify-content: center;

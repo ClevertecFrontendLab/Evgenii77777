@@ -55,4 +55,19 @@ export const dataMode = [
         textBtn: 'Повторить',
         id: 'registration-retry-button',
     },
+    {
+        type: '/feedbacks',
+        title: 'Отзыв успешно опубликован',
+        textBtn: 'Отлично',
+        error: false,
+    },
+    {
+        type: '/feedbacks',
+        title: 'Данные не сохранились',
+        text: 'Что-то пошло не так.Попробуйте ещё раз.',
+        textBtn: 'Написать отзыв',
+        textBtnSecond: 'Закрыть',
+        id: 'write-review-not-saved-modal',
+        error: true,
+    },
 ];
